@@ -45,12 +45,15 @@ class _MeasuredSizeState extends State<MeasuredSize> {
   void postFrameCallback(_) async {
     var context = widgetKey.currentContext!;
 
-    await Future.delayed(
-        Duration(milliseconds: 100)); // wait till the image is drawn
-    Size newSize = context.size!;
-    if (newSize == Size.zero) return;
-    if (oldSize == newSize) return;
-    oldSize = newSize;
-    widget.onChange(newSize);
+    await Future.delayed(Duration(milliseconds: 100)); // wait till the image is drawn
+    try {
+      Size newSize = context.size!;
+      if (newSize == Size.zero) return;
+      if (oldSize == newSize) return;
+      oldSize = newSize;
+      widget.onChange(newSize);
+    } catch(e) {
+
+    }
   }
 }
